@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package pet;
+
 // Opción para que gRPC genere el código en el paquete Java correcto.
 option java_package = "com.petplataform.msmascotas.grpc.generated";
 option java_multiple_files = true;
