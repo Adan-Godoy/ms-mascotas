@@ -1,0 +1,35 @@
+version: '3.9'
+
+services:
+  ms-mascotas:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ms-mascotas
+    restart: always
+    depends_on:
+      - mongo
+    ports:
+      - '9090:9090'
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/mascotas
+    networks:
+      - petproject-network
+
+  mongo:
+    image: mongo:6
+    container_name: mongo-mascotas
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - petproject-network
+
+volumes:
+  mongo_data:
+
+networks:
+  petproject-network:
+    external: true
